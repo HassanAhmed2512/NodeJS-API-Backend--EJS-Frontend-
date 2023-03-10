@@ -1,0 +1,42 @@
+<%- include('parts/header') %> 
+<%- include('parts/navbar') %>
+
+<div class="container mt-3">
+  <% if( items.length === 0 ) { %>
+    <p class="alert alert-danger mt-3" >There nothing in the Orders </p>
+    <% } else { %>  
+  <table  class="table table-bordered" >
+    <thead>
+      <td>no</td>
+      <td>product name </td>
+      <td>cost</td>
+      <td>amount</td>
+      <td>status</td>
+    </thead>
+    <tbody>
+      <% for(let i = 0 ; i < items.length ; i++){ %>
+      <tr>
+        <td><%= i+1 %></td>
+        <td><%= items[i].name %></td>
+        <td><%= items[i].price %> $</td>
+        <td><%= items[i].amount %></td>
+        <td><%= items[i].state %> </td>
+        <form method="POST">
+          <td>  
+            <input type="hidden" name="orderId" value="<%= items[i]._id %>" />
+            <input type="submit" value="delete" class="btn btn-danger" formaction="/orders/delete"/>
+          </td>
+        </form>
+      </tr>
+      <% } %>
+    </tbody>
+  </table>
+  <% } %>
+  <div class="fixed-bottom d-flex justify-content-end mr-3 mb-3">
+    <form action="/orders/deleteall" method="POST">
+      <input type="submit" value="Delete All" class="btn btn-danger" >
+    </form>
+  </div>
+</div>
+
+<%- include('parts/footer') %>

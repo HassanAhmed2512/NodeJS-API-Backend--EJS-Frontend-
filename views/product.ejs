@@ -1,0 +1,41 @@
+<%- include('parts/header') %>
+<%- include('parts/navbar') %>
+
+<div class="container">
+  <% if (!product) { %>
+    <div class="alert alert-danger">
+      <h3>There is no products match this id</h3>
+    </div>
+  <% } else { %>
+    <div class="row">
+      <div class="col-12 col-md-6 mt-4">
+        <div class="d-flex justify-content-center align-items-center image-container" style="height: 400px; width: 400px;">
+          <img src="/<%= product.image %>" class="img-fluid object-fit">
+        </div>
+      </div>
+      <div class="col-12 col-md-6 mt-4">
+        <% if (vaildationcart) { %>
+          <div class="alert alert-danger">
+            <%= vaildationcart.msg %>
+          </div>
+        <% } %>
+        <h3><%= product.name %></h3>
+        <h5><%= product.price %></h5>
+        <p><%= product.description %></p>
+        <form action="/cart" method="POST">
+          <div class="form-group">
+            <label for="amount">Amount</label>
+            <input type="number" name="amount" class="form-control">
+          </div>
+          <input type="submit" value="Add To Cart" class="btn btn-primary">
+          <input type="hidden" name="name" value="<%= product.name %>">
+          <input type="hidden" name="price" value="<%= product.price %>">
+          <input type="hidden" name="productId" value="<%= product.id %>">
+          <input type="hidden" name="redirectTo" value="/product/<%= product.id %>">
+        </form>
+      </div>
+    </div>
+  <% } %>
+</div>
+
+<%- include('parts/footer') %>

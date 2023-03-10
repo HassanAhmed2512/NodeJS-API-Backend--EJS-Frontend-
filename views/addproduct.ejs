@@ -1,0 +1,61 @@
+<%- include('parts/header') %>
+<%- include('parts/navbar') %>
+
+<div class="container text-center">
+    <h3>Add Product</h3>
+    <form action="/admin/add" method="POST" enctype="multipart/form-data">
+      <div class="form-group">
+        <input type="text" class="form-control mb-3 mt-3" name="name" placeholder="name">
+        <% let nameerr = vaildation.find(err => err.param === 'name') %>
+        <% if(nameerr){ %>
+          <p class="alert alert-danger">
+            <%= nameerr.msg %> 
+          </p>
+        <% } %>
+      </div>
+      <div class="form-group">
+        <input type="number" class="form-control mb-3 mt-3" name="price" placeholder="price">
+        <% let numbererr = vaildation.find(err => err.param === 'price') %>
+        <% if(numbererr){ %>
+          <p class="alert alert-danger">
+            <%= numbererr.msg %> 
+          </p>
+        <% } %>
+      </div>
+      <div class="form-group">
+        <textarea class="form-control mb-3 mt-3" name="description" placeholder="description"></textarea>
+        <% let descriptionerr = vaildation.find(err => err.param === 'description') %>
+        <% if(descriptionerr){ %>
+          <p class="alert alert-danger">
+            <%= descriptionerr.msg %> 
+          </p>
+        <% } %>
+      </div>
+      <div class="form-group">
+        <select class="form-control mb-3 mt-3" name="category">
+          <option value="" selected>Chose a category</option>
+          <option value="pants">Pants</option>
+          <option value="t-shirts">T-shirts</option>
+          <option value="boots">Boots</option>
+          <option value="jackets">Jackets</option>
+          <option value="coats">Coats</option>
+          <option value="shoes">Shoes</option>
+          <option value="skirt">Skirt</option>
+          <option value="dress">Dress</option>
+        </select> 
+      </div>
+      <div class="form-group">
+        <input type="file" name="image" placeholder="image" class="form-control mb-3 mt-3">
+        <% let imageerr = vaildation.find(err => err.param === 'image') %>
+        <% if(imageerr){ %>
+          <p class="alert alert-danger">
+            <%= imageerr.msg %> 
+          </p>
+        <% } %>
+      </div>
+      <input type="submit" class="btn btn-primary mt-3" value="Add Product">
+    </form>
+  </div>
+  
+
+<%- include('parts/footer') %>

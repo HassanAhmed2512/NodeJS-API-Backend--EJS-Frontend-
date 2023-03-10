@@ -1,0 +1,52 @@
+<%- include('parts/header') %> <%- include('parts/navbar') %>
+
+<div class="container mt-3">
+  <% if( items.length === 0 ) { %>
+    <p class="alert alert-danger mt-3">There nothing in the cart</p>
+    <% } else { %>
+
+      <% if(vaildationcart) { %>
+        <p class="alert alert-danger mt-3">
+          <%= vaildationcart.msg %>
+        </p>
+      <% } %>
+  
+  <table  class="table table-bordered" >
+    <thead>
+      <td>no</td>
+      <td>name</td>
+      <td>price</td>
+      <td>amount</td>
+      <td>total</td>
+    </thead>
+    <tbody>
+      <% for(let i = 0 ; i < items.length ; i++){ %>
+      <tr>
+        <td><%= i+1 %></td>
+        <td><%= items[i].name %></td>
+        <td><%= items[i].price %> $</td>
+        <form method="POST">
+          <td> <input type="text" name="amount" class="form-control" value="<%= items[i].amount %>"/> </td>
+          <td> <%= items[i].price * items[i].amount %> $</td>
+          <td>
+            <input type="hidden" name="name" value="<%= items[i].name %>" />
+            <input type="hidden" name="price" value="<%= items[i].price * items[i].amount %>" />
+            <input type="hidden" name="cartId" value="<%= items[i]._id %>" />
+            <input type="submit" value="save" class="btn btn-success" formaction="/cart/save" />
+            <input type="submit" value="Order" class="btn btn-success" formaction="/orders" />
+            <input type="submit" value="delete" class="btn btn-danger" formaction="/cart/delete"/>
+          </td>
+        </form>
+      </tr>
+      <% } %>
+    </tbody>
+  </table>
+  <% } %>
+  <div class="fixed-bottom d-flex justify-content-end mr-3 mb-3">
+    <form action="/cart/deleteall" method="POST">
+      <input type="submit" value="Delete All" class="btn btn-danger" >
+    </form>
+  </div>
+</div>
+
+<%- include('parts/footer') %>

@@ -1,0 +1,37 @@
+<%- include('parts/header') %>
+<%- include('parts/navbar') %>
+
+<div class="container text-center" >
+    <h3>Create Account</h3>
+    <form action="/signup" method="POST">
+        <input type="text" class="form-control mb-3 mt-3" name="username" placeholder="Username" >
+        <% let usernameErr = vaildation.find(err => err.param === 'username') %>
+        <% if(usernameErr){ %>
+            <p class="alert alert-danger mt-3">
+                <%= usernameErr.msg %> 
+            </p>
+        <% } %>
+        <input type="email" class="form-control mb-3 mt-3" name="email" placeholder="email" >
+        <% let emailErr = vaildation.find(err => err.param === 'email') %>
+        <% if(emailErr){ %>
+            <p class="alert alert-danger mt-3">
+                <%= emailErr.msg %> 
+            </p>
+        <% } %>
+        <input type="password" class="form-control mb-3 mt-3" name="password" placeholder="Password" >
+        <% let passwordErr = vaildation.find(err => err.param === 'password') %>
+        <% if(passwordErr){ %>
+            <p class="alert alert-danger mt-3">
+                <%= passwordErr.msg %> 
+            </p>
+        <% } %>
+        <input type="password" class="form-control mb-3 mt-3" name="confirmpassword" placeholder="confirmPassword" >
+        <input type="submit" class="btn btn-primary mb-3 mt-3" value="Create Account" >
+    </form>
+    <br>
+    <div>
+        Already have account ? <a href="/signin"> Sign in</a>
+    </div>
+</div>
+
+<%- include('parts/footer') %>

@@ -1,0 +1,29 @@
+<%- include('parts/header') %>
+<%- include('parts/navbar') %>
+
+<div class="container text-center" >
+    <h3>Login</h3>
+    <form action="/signin" method="POST">
+        <input type="email" class="form-control mb-3 mt-3" name="email" placeholder="email" >
+        <% let emailErr = vaildation.find(err => err.param === 'email') %>
+        <% if(emailErr){ %>
+            <p class="alert alert-danger mt-3">
+                <%= emailErr.msg %> 
+            </p>
+        <% } %>
+        <input type="password" class="form-control mb-3 mt-3" name="password" placeholder="Password" >
+        <% let passwordErr = vaildation.find(err => err.param === 'password') %>
+        <% if(passwordErr){ %>
+            <p class="alert alert-danger mt-3">
+                <%= passwordErr.msg %> 
+            </p>
+        <% } %>
+
+        <input type="submit" class="btn btn-primary mt-3" value="Signin" >
+    </form>
+    <br>
+    <div>
+        Don't have an account ? <a href="/signup"> Create Account</a>
+    </div>
+</div>
+<%- include('parts/footer') %>
